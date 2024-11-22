@@ -1,0 +1,380 @@
+/* Silahkan modifikasi CSS untuk halaman utama disini */
+/* Global Reset */
+body, html, div, nav, a {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to left bottom, #f7d077, #ffffff, #ffffff); /* Gradien */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: left;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.team-page{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+/* Container untuk title */
+.title-container {
+    display: grid;
+    justify-self: center;
+    align-items: flex-start;
+    text-align: left;
+    margin-left: 50px;
+    width: 541px;
+    height: 394px;
+    padding: 20px;
+}
+
+/* Title */
+p.tittle1 {
+    font-size: 30px; 
+    font-weight: bold;
+    color: #021639;
+    text-align: left;
+    margin: 0;
+}
+
+p.tittle2 {
+    font-size: 48px;
+    font-weight: 700; /* Berat teks bold */
+    color: #3D68FF; /* Warna biru sesuai desain */
+    text-align: left; /* Posisi teks ke kiri */
+    margin-top: 5px ; /* Beri sedikit jarak dengan subjudul */
+    line-height: 1.2; /* Atur jarak antar baris */
+    margin-bottom: 24px;
+}
+
+/* Tittle 3 (Deskripsi Singkat) */
+p.tittle3 {
+    font-size: 16px; /* Ukuran teks deskripsi */
+    font-weight: bold; /* Berat teks normal */
+    color: #555; /* Warna abu-abu gelap */
+    text-align: left; /* Rata kiri */
+    line-height: 1.5; /* Jarak antar-baris yang nyaman */
+    max-width: 600px; /* Lebar maksimal deskripsi */
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+/* Gambar Bulat */
+.circle-images {
+    display: flex; /* Tata letak horizontal */
+    justify-content: left; /* Gambar di tengah */
+    align-items: center; /* Selaraskan secara vertikal */
+    position: relative; /* Untuk menempatkan elemen count */
+    margin-bottom: 24px;
+}
+
+.circle {
+    width: 55px; /* Ukuran lingkaran */
+    height: 55px; /* Ukuran lingkaran */
+    border-radius: 50%; /* Membuat lingkaran */
+    overflow: hidden; /* Pastikan gambar tidak keluar */
+    border: 2px solid white; /* Border putih */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
+    position: relative; /* Untuk memungkinkan tumpang tindih */
+    margin-left: -20px; /* Overlap gambar */
+    z-index: 1; /* Pastikan tumpang tindih sesuai urutan */
+    margin-bottom: 24px;
+}
+
+.circle:first-child {
+    margin-left: 0; /* Hapus overlap untuk gambar pertama */
+}
+
+.circle img {
+    width: 100%; /* Sesuaikan gambar dengan lingkaran */
+    height: 100%;
+    object-fit: cover; /* Memastikan gambar tidak terdistorsi */
+}
+
+/* Desain logo Python */
+.logo-python {
+    display: flex;
+    justify-content: center; /* Menyusun logo di tengah secara horizontal */
+    align-items: flex-end; /* Menyusun logo di tengah secara vertikal */
+    position: absolute; /* Agar kita bisa menata lebih lanjut jika diperlukan */
+    left: 70%;
+    margin-right: 100px;
+}
+
+.logo-python img {
+    width: 240px; /* Menyesuaikan ukuran logo sesuai gambar */
+    height: 240px; /* Menjaga proporsi logo tetap persegi */
+    object-fit: contain; /* Menjaga gambar tetap proporsional */
+    border: 3px solid #fff; /* Border putih di sekitar gambar */
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2); /* Efek bayangan agar logo tampak lebih menonjol */
+    transition: transform 0.3s ease; /* Efek transisi saat hover */
+    background-color: #fff;
+    border-radius: 42px; 
+}
+
+/* Container untuk tombol */
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: left; /* Menyusun tombol secara horizontal di tengah */
+    gap: 20px; /* Memberikan jarak antar tombol */
+}
+
+/* Desain tombol */
+.btn {
+    padding: 10px 20px; /* Memberikan ruang dalam tombol */
+    color: #021639; /* Warna teks putih */
+    font-size: 13px; /* Ukuran font pada tombol */
+    font-weight: bold; /* Membuat teks pada tombol tebal */
+    text-decoration: none; /* Menghilangkan garis bawah pada tautan */
+    border-radius: 60px; /* Membuat sudut tombol melengkung */
+    text-align: center; /* Menyusun teks di tengah */
+    transition: background-color 0.3s, transform 0.3s; /* Efek transisi saat hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Efek bayangan pada tombol */
+    border: 2px solid #333;
+}
+
+.btn:hover {
+    background-color: #021639; /* Mengubah warna saat hover */
+    color: #F4F4F4;
+    transform: scale(1.05); /* Efek perbesaran saat hover */
+}
+
+/* Styling untuk tombol ketika berada dalam focus */
+.btn:focus {
+    outline: none; /* Menghilangkan outline fokus pada tombol */
+}
+
+.team{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    min-height: 100vh;
+    margin: 0; 
+    padding: 0; /* Menghapus padding */
+    background: linear-gradient(to bottom, #f5f5f5, #f1f1f1); /* Menambahkan background gradasi */
+}
+
+/* Navbar Styling */
+.navbar {
+    position: fixed;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff; /* Warna latar putih */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15); 
+    border-radius: 50px; /* Membulatkan ujung */
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+}
+
+/* Container di dalam Navbar */
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px; /* Spasi antar-elemen */
+}
+
+/* Logo Styling */
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.navbar-logo img {
+    height: 30px; /* Ukuran logo lebih kecil */
+    margin-right: 8px;
+}
+
+.navbar-logo span {
+    font-size: 14px; /* Teks logo lebih kecil */
+    color: #555;
+}
+
+/* Links Styling */
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Spasi antar-link */
+}
+
+.navbar-links .nav-link {
+    text-decoration: none;
+    font-size: 12px; /* Ukuran teks lebih kecil */
+    font-weight: bold;
+    color: #333;
+    padding: 8px 16px;
+    border-radius: 20px; /* Membulatkan tombol */
+    transition: all 0.3s ease;
+}
+
+.navbar-links .nav-link.active {
+    background-color: #002b80; /* Warna biru untuk link aktif */
+    color: white;
+}
+
+.navbar-links .nav-link:hover {
+    background-color: #e0e0e0; /* Warna abu-abu terang saat hover */
+    color: #333;
+}
+
+/* Konten */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+ .content {
+    text-align: center;
+}
+
+span{
+    font-size: 13px;
+}
+
+h2 {
+    font-size: 35px; /* Ukuran besar sesuai keinginan */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.text-black {
+    color: #333;
+    font-size: 35px;
+}
+
+.text-purple {
+    color: #3D68FF;
+    font-size: 35px;
+}
+
+.judul{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.mentor {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.mentor-card {
+    position: relative; /* Mengatur posisi relatif untuk container */
+    width: 160px;
+    height: 160px;
+}
+
+.mentor-card img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0px 10px 13px rgba(0, 0, 0, 0.2);
+}
+
+.mentor-card .overlay {
+    position: absolute; /* Overlay di atas gambar */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.6); /* Warna semi-transparan */
+    color: #fff;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mentor-card .overlay p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.member {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.member-card {
+    position: relative; 
+    width: 160px;
+    height: 160px;
+}
+
+.member-card img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0px 10px 13px rgba(0, 0, 0, 0.2);
+}
+
+.member-card .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.418);
+    color: #fff;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.member-card .overlay p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #F4F4F4;
+    color: #1e293b;
+    margin-top: 2rem;
+}
