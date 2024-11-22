@@ -1,0 +1,196 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import dayjs from "dayjs";
+import { Image } from "astro:assets";
+import { getEntries } from "astro:content";
+
+const articles = (await getCollection("blog")).sort(
+    (a, b) => dayjs(b.data.date).unix() - dayjs(a.data.date).unix(),
+);
+const authors = await getEntries(articles.map((item) => item.data.author));
+
+const topGrids = articles.slice(0, 3);
+
+const otherGrids = articles.slice(3);
+---
+
+<Layout title="Read Our Blog" active="blog">
+    <main class="container decorated decor-right">
+        <header class="header-section">
+            <h1 class="title">
+                Read
+                <span class="primary">Our Blog</span>
+            </h1>
+            <h2 class="subtitle">Read Article About Linux and Open Source</h2>
+        </header>
+
+        <div class="top-grid">
+            {
+                topGrids.map((article) => {
+                    const author = authors.find(
+                        (item) => item.slug == article.data.author.slug,
+                    );
+
+                    return (
+                        <a href={`/blog/${article.slug}`} class="article">
+                            <article>
+                                <Image
+                                    src={article.data.cover}
+                                    alt={article.data.title}
+                                />
+                                <div class="meta">
+                                    <div class="author">
+                                        {author?.data.name} •{" "}
+                                        {dayjs(article.data.date).format(
+                                            "DD MMMM YYYY",
+                                        )}
+                                    </div>
+                                    <h3>{article.data.title}</h3>
+                                </div>
+                            </article>
+                        </a>
+                    );
+                })
+            }
+        </div>
+        <div class="other-grid">
+            {
+                otherGrids.map((article) => {
+                    const author = authors.find(
+                        (item) => item.slug == article.data.author.slug,
+                    );
+
+                    return (
+                        <a href={`/blog/${article.slug}`} class="article">
+                            <article>
+                                <Image
+                                    src={article.data.cover}
+                                    alt={article.data.title}
+                                />
+                                <div class="meta">
+                                    <div class="author">
+                                        {author?.data.name} •{" "}
+                                        {dayjs(article.data.date).format(
+                                            "DD MMMM YYYY",
+                                        )}
+                                    </div>
+                                    <h3>{article.data.title}</h3>
+                                </div>
+                            </article>
+                        </a>
+                    );
+                })
+            }
+        </div>
+    </main>
+    <style>
+        .top-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 33.33fr);
+            grid-template-rows: repeat(2, 50fr);
+            gap: 12px;
+            grid-template-areas:
+                "first first second"
+                "first first third";
+        }
+        .top-grid .article:nth-child(1) {
+            grid-area: first;
+        }
+        .top-grid .article:nth-child(2) {
+            grid-area: second;
+        }
+        .top-grid .article:nth-child(3) {
+            grid-area: third;
+        }
+
+        .article {
+            position: relative;
+            aspect-ratio: 16/9;
+            display: block;
+            border-radius: 12px;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        .top-grid .article:nth-child(1) {
+            aspect-ratio: unset;
+        }
+        .top-grid .article:only-child {
+            aspect-ratio: 16/9;
+        }
+        .article img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            transition: all 0.3s ease;
+        }
+        .article:hover img {
+            transform: scale(1.1);
+        }
+        .article .meta {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                var(--blue-100)
+            );
+            color: var(--background-100);
+            padding: 20px;
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .article h3 {
+            font-size: 18px;
+            color: var(--yellow-100);
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+        .top-grid .article:first-child h3 {
+            font-size: 30px;
+        }
+        .article .author {
+            font-size: 14px;
+        }
+        .other-grid {
+            display: grid;
+            margin-top: 12px;
+            grid-template-columns: repeat(3, minmax(100px, 1fr));
+            gap: 12px;
+            margin-bottom: 140px;
+        }
+        .other-grid .article img,
+        .other-grid .article .meta {
+            position: static;
+            color: var(--text-80);
+        }
+        .other-grid .article img {
+            border-radius: 12px;
+        }
+        .other-grid .article:hover img {
+            transform: unset;
+        }
+        .other-grid .article {
+            overflow: unset;
+        }
+        .other-grid .article .meta {
+            position: static;
+            background: unset;
+            padding: 0;
+            margin-top: 8px;
+            color: var(--text-80);
+        }
+        .other-grid .article .meta h3 {
+            color: var(--blue-100);
+        }
+    </style>
+</Layout>

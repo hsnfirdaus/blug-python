@@ -1,0 +1,111 @@
+---
+import "@fontsource-variable/league-spartan";
+import Navbar from "./Navbar.astro";
+import { ViewTransitions } from "astro:transitions";
+
+interface Props {
+	title: string;
+	active: "home" | "our-team" | "blog";
+}
+
+const { title, active } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} - The Python</title>
+		<ViewTransitions />
+	</head>
+	<body>
+		<slot />
+		<Navbar active={active} />
+	</body>
+</html>
+<style is:global>
+	:root {
+		--blue-100: #021639;
+		--blue-40: #3d68ff;
+		--blue-20: #3bc9fb;
+
+		--yellow-100: #ffc846;
+		--yellow-blur: #ffc84699;
+		--yellow-shadow: #ffc84640;
+
+		--background-100: #ffffff;
+		--background-80: #e5eeff;
+		--background-trans: #ffffffcc;
+
+		--text-100: #020c1d;
+		--text-80: #020c1dcc;
+
+		--border: #e4e9f3;
+	}
+	html {
+		font-family: "League Spartan Variable", sans-serif;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	img {
+		max-width: 100%;
+	}
+	body {
+		color: var(--text-80);
+		scrollbar-gutter: stable;
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+	.title {
+		color: var(--blue-100);
+		font-weight: bold;
+		margin-bottom: 10px;
+		font-size: 48px;
+	}
+	.title.smaller {
+		font-size: 36px;
+	}
+	.subtitle {
+		font-weight: normal;
+		font-size: 18px;
+	}
+	.primary {
+		color: var(--blue-40);
+	}
+	.container {
+		max-width: 1100px;
+		margin: auto;
+		padding: 0 20px;
+	}
+	.header-section {
+		text-align: center;
+		padding: 60px 0;
+	}
+	.title-section {
+		text-align: center;
+		padding: 0 0 20px 0;
+	}
+	.decorated::after {
+		content: "";
+		filter: blur(100px);
+		background-image: radial-gradient(var(--yellow-blur), transparent);
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		display: inline-block;
+		top: 0px;
+		left: -100px;
+		transform: translate(-50%, -50%);
+		z-index: -1;
+	}
+	.decorated.decor-right::after {
+		left: 100%;
+	}
+</style>

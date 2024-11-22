@@ -1,0 +1,195 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../../../layouts/Layout.astro";
+import { getCollection, getEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Facebook from "../../../assets/socials/Facebook.svg";
+import GitHub from "../../../assets/socials/GitHub.svg";
+import Instagram from "../../../assets/socials/Instagram.svg";
+import Website from "../../../assets/socials/Website.svg";
+
+export const getStaticPaths = (async () => {
+    const teams = await getCollection("team");
+    return teams.map((item) => ({
+        params: {
+            slug: item.slug,
+        },
+    }));
+}) satisfies GetStaticPaths;
+
+const { slug } = Astro.params;
+const item = await getEntry("team", slug);
+if (!item) return Astro.redirect("/404");
+
+const { data } = item;
+const { Content } = await item.render();
+---
+
+<Layout title={data.name} active="our-team">
+    <main class="container decorated">
+        <header class="top-section">
+            <figure>
+                <Image src={data.photo} alt={data.name} />
+            </figure>
+            <div class="top-meta">
+                <div class="top-text">
+                    <h1>{data.name}</h1>
+                    <h2>{data.class}</h2>
+                </div>
+
+                <div class="socials">
+                    {
+                        data.socials.map((social) => (
+                            <a
+                                href={social.href}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <Image
+                                    alt=""
+                                    src={
+                                        social.type === "facebook"
+                                            ? Facebook
+                                            : social.type === "github"
+                                              ? GitHub
+                                              : social.type === "instagram"
+                                                ? Instagram
+                                                : Website
+                                    }
+                                />
+                                <span>{social.label}</span>
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+        </header>
+        <article>
+            <h3 class="title smaller">
+                About
+                <span class="primary">Me</span>
+            </h3>
+            <div class="content">
+                <Content />
+            </div>
+        </article>
+        {
+            data.portfolio && (
+                <section id="portfolio">
+                    <h3 class="title smaller">
+                        My
+                        <span class="primary">Portfolio</span>
+                    </h3>
+                    <div class="portfolio-items">
+                        {data.portfolio.map((item) => (
+                            <div class="portfolio-item">
+                                <Image src={item.image} alt={item.title} />
+                                <div class="portfolio-text">
+                                    <h4>{item.title}</h4>
+                                    <p>{item.subtitle}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )
+        }
+    </main>
+    <style>
+        .top-section {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin: 80px 0 40px 0;
+        }
+        .top-section figure img {
+            height: 250px;
+            width: 250px;
+            border-radius: 20px;
+            object-fit: cover;
+            object-position: center;
+        }
+        .top-text h1 {
+            color: var(--blue-100);
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+        .top-text h2 {
+            font-size: 20px;
+            color: var(--blue-40);
+            margin-bottom: 36px;
+        }
+        .socials {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .socials a {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-80);
+            font-size: 18px;
+        }
+        .socials a:hover {
+            color: var(--blue-40);
+        }
+        .content {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        #portfolio {
+            margin: 40px 0 140px 0;
+        }
+
+        .portfolio-items {
+            display: grid;
+            grid-template-columns: repeat(2, 50fr);
+            gap: 40px;
+        }
+        .portfolio-item {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .portfolio-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        .portfolio-item .portfolio-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                var(--blue-100)
+            );
+            color: var(--background-100);
+            padding: 20px;
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .portfolio-item .portfolio-text h4 {
+            color: var(--yellow-100);
+            font-size: 24px;
+        }
+    </style>
+</Layout>

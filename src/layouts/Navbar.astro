@@ -1,0 +1,84 @@
+---
+import { Image } from "astro:assets";
+import Logo from "../assets/Logo.svg";
+
+interface Props {
+    active: "home" | "our-team" | "blog";
+}
+
+const { active } = Astro.props;
+---
+
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="/" class="navbar-logo">
+            <Image src={Logo} alt="Logo The Python" />
+        </a>
+        <div class="navbar-links">
+            <a href="/" class={`nav-link ${active === "home" ? "active" : ""}`}
+                >Home</a
+            >
+            <a
+                href="/our-team"
+                class={`nav-link ${active === "our-team" ? "active" : ""}`}
+                >Our Team</a
+            >
+            <a
+                href="/blog"
+                class={`nav-link ${active === "blog" ? "active" : ""}`}
+                >Our Blog</a
+            >
+        </div>
+    </div>
+</nav>
+<style>
+    .navbar {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--background-trans);
+        border-radius: 50px;
+        padding: 6px 20px;
+        display: flex;
+        align-items: center;
+        z-index: 100;
+        border: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+    }
+    .navbar-container {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+    .navbar-logo {
+        display: flex;
+        align-items: center;
+    }
+    .navbar-logo img {
+        height: 50px;
+    }
+    .navbar-links {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .navbar-links .nav-link {
+        text-decoration: none;
+        color: var(--text-80);
+        padding: 8px 16px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-links .nav-link.active {
+        background-color: var(--blue-100);
+        color: var(--background-100);
+    }
+
+    .navbar-links .nav-link:not(.active):hover {
+        background-color: var(--border);
+        color: var(--blue-100);
+    }
+</style>

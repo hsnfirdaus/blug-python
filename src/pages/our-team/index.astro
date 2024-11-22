@@ -1,0 +1,132 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+const teams = await getCollection("team");
+const mentors = teams.filter((it) => it.data.type === "mentor");
+const members = teams.filter((it) => it.data.type === "member");
+---
+
+<Layout title="Meet Our Team" active="our-team">
+    <main class="container decorated">
+        <header class="header-section">
+            <h1 class="title">
+                Meet
+                <span class="primary">Our Team</span>
+            </h1>
+            <h2 class="subtitle">Mentor & Member of Python Team</h2>
+        </header>
+
+        <section id="mentor">
+            <section class="title-section">
+                <h3 class="title smaller">
+                    Our
+                    <span class="primary">Mentor</span>
+                </h3>
+            </section>
+            <div class="person-flex">
+                {
+                    mentors.map((mentor) => (
+                        <a
+                            class="person-card"
+                            href={"/our-team/" + mentor.slug}
+                        >
+                            <Image
+                                src={mentor.data.photo}
+                                alt={mentor.data.name}
+                            />
+                            <div class="overlay">
+                                <h4>{mentor.data.name}</h4>
+                                <span>{mentor.data.class}</span>
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
+        </section>
+        <section id="member">
+            <section class="title-section">
+                <h3 class="title smaller">
+                    Our
+                    <span class="primary">Member</span>
+                </h3>
+            </section>
+            <div class="person-flex">
+                {
+                    members.map((member) => (
+                        <a
+                            class="person-card"
+                            href={"/our-team/" + member.slug}
+                        >
+                            <Image
+                                src={member.data.photo}
+                                alt={member.data.name}
+                            />
+                            <div class="overlay">
+                                <h4>{member.data.name}</h4>
+                                <span>{member.data.class}</span>
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
+        </section>
+    </main>
+    <style>
+        .person-flex {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .person-card {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .person-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 1s ease;
+        }
+        .person-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .person-card .overlay {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            right: 8px;
+            background: var(--background-trans);
+            color: var(--text-80);
+            padding: 10px 5px;
+            border-radius: 12px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .person-card .overlay h4 {
+            font-size: 16px;
+            color: var(--blue-100);
+            line-height: 1.5;
+            margin-bottom: 5px;
+        }
+        .person-card:hover .overlay h4 {
+            color: var(--blue-40);
+        }
+        #mentor {
+            margin-bottom: 80px;
+        }
+        #member {
+            margin-bottom: 120px;
+        }
+    </style>
+</Layout>
