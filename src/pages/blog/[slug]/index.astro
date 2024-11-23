@@ -1,0 +1,100 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import dayjs from "dayjs";
+
+export const getStaticPaths = (async () => {
+    const articles = await getCollection("blog");
+    return articles.map((item) => ({
+        params: {
+            slug: item.slug,
+        },
+    }));
+}) satisfies GetStaticPaths;
+
+const { slug } = Astro.params;
+const item = await getEntry("blog", slug);
+if (!item) return Astro.redirect("/404");
+
+const { data } = item;
+const { data: author } = await getEntry(data.author);
+
+const { Content } = await item.render();
+---
+
+<Layout title={data.title} active="blog">
+    <main class="container decorated decor-right">
+        <header>
+            <h1>{data.title}</h1>
+            <div class="author">
+                <Image src={author.photo} alt={author.name} />
+                <div class="author-meta">
+                    <div class="author-name">{author.name}</div>
+                    <time class="date"
+                        >{dayjs(data.date).format("DD MMMM YYYY")}</time
+                    >
+                </div>
+            </div>
+        </header>
+        <figure class="cover">
+            <Image src={data.cover} alt={data.title} />
+        </figure>
+        <article class="content md-content">
+            <Content />
+        </article>
+    </main>
+    <style>
+        main {
+            --max-width: 876px;
+        }
+        header {
+            margin: 80px auto 40px auto;
+            text-align: center;
+            max-width: var(--max-width);
+        }
+        header h1 {
+            color: var(--blue-100);
+            font-size: 32px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-align: left;
+        }
+        .author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+        .author .author-name {
+            font-weight: bold;
+            color: var(--text-100);
+            margin-bottom: 8px;
+        }
+        .cover img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            margin-bottom: 140px;
+            line-height: 1.5;
+            font-size: 18px;
+        }
+
+        @media (min-width: 768px) {
+            header h1 {
+                font-size: 48px;
+            }
+        }
+    </style>
+</Layout>

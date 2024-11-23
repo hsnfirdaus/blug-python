@@ -58,20 +58,23 @@ const members = await getCollection(
 	<style>
 		.main-page {
 			display: flex;
-			justify-content: space-between;
+			justify-content: center;
 			align-items: center;
 			min-height: 100vh;
 			gap: 40px;
+			flex-direction: column;
+			padding: 80px 0 140px 0;
+			flex-direction: column-reverse;
 		}
 		.first-line {
-			font-size: 64px;
+			font-size: 48px;
 			font-weight: bold;
 			color: var(--blue-100);
 			margin-bottom: 24px;
 			display: block;
 		}
 		.team-name {
-			font-size: 84px;
+			font-size: 64px;
 			font-weight: bold;
 			color: var(--blue-40);
 			margin-bottom: 24px;
@@ -128,8 +131,8 @@ const members = await getCollection(
 			content: "";
 			filter: blur(100px);
 			background-image: radial-gradient(var(--yellow-blur), transparent);
-			height: 600px;
-			width: 600px;
+			height: 200px;
+			width: 200px;
 			position: absolute;
 			display: inline-block;
 			top: 50%;
@@ -141,16 +144,18 @@ const members = await getCollection(
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			height: 320px;
-			width: 320px;
 			background-color: var(--background-100);
 			box-shadow: var(--yellow-shadow) 0 0 40px;
-			border-radius: 60px;
+			padding: 40px;
+			height: 180px;
+			width: 180px;
+			padding: 20px;
+			border-radius: 40px;
 		}
 
 		.logo-python img {
-			width: 220px;
-			height: 220px;
+			width: 100%;
+			height: 100%;
 		}
 		.button-container {
 			display: flex;
@@ -183,6 +188,32 @@ const members = await getCollection(
 		.btn.primary:hover {
 			background-color: var(--blue-40);
 			border-color: var(--blue-40);
+		}
+		@media (min-width: 768px) {
+			.logo-python {
+				height: 320px;
+				width: 320px;
+				border-radius: 60px;
+				padding: 40px;
+			}
+			.right-container::after {
+				height: 600px;
+				width: 600px;
+			}
+			.first-line {
+				font-size: 64px;
+			}
+			.team-name {
+				font-size: 84px;
+			}
+		}
+		@media (min-width: 1024px) {
+			.main-page {
+				flex-direction: row;
+				padding: 0px;
+				flex-direction: unset;
+				justify-content: space-between;
+			}
 		}
 	</style>
 </Layout>

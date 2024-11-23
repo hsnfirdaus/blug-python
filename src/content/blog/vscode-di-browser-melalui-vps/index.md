@@ -27,7 +27,7 @@ curl -fsSL https://code-server.dev/install.sh | sh
 
 Perintah tersebut akan menginstall code-server beserta dengan beberapa dependensinya.
 
-![1.png]
+![Menjalankan script installer](1.png)
 
 ### Melakukan konfigurasi
 
@@ -37,7 +37,7 @@ Selanjutnya kita akan mengubah konfigurasi code-server kita. File konfigurasi co
 nano ~/.config/code-server/config.yaml
 ```
 
-![2.png]
+![Melakukan konfigurasi](2.png)
 
 Silakan ubah password di konfigurasi tersebut (field key password, bukan auth). Untuk bind address biarkan 127.0.0.1:8080, kita akan melakukan forwarding port dengan nginx dan menambahkan  sertifikat https nantinya di nginx. Lakukan restart pada service code-server:
 
@@ -92,11 +92,11 @@ sudo systemctl restart nginx
 
 Sampai disini ketika kalian mengakses domain server, akan muncul halaman login code-server.
 
-![3.png]
+![Halaman login code-server](3.png)
 
 Setelah memasukkan password, Anda akan disuguhkan dengan landing page code-server yang sama seperti VSCode.
 
-![4.png]
+![Halaman utama code-server](4.png)
 
 Disini Anda dapat membuka file atau folder di server Anda maupun membuka sebuah terminal untuk melakukan cloning git repository.
 

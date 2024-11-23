@@ -101,6 +101,7 @@ const { Content } = await item.render();
             gap: 40px;
             align-items: center;
             margin: 80px 0 40px 0;
+            flex-direction: column;
         }
         .top-section figure img {
             height: 250px;
@@ -113,6 +114,7 @@ const { Content } = await item.render();
             color: var(--blue-100);
             font-size: 40px;
             margin-bottom: 16px;
+            line-height: 1.5;
         }
         .top-text h2 {
             font-size: 20px;
@@ -123,6 +125,7 @@ const { Content } = await item.render();
             display: flex;
             gap: 20px;
             align-items: center;
+            flex-wrap: wrap;
         }
         .socials a {
             display: flex;
@@ -145,7 +148,7 @@ const { Content } = await item.render();
 
         .portfolio-items {
             display: grid;
-            grid-template-columns: repeat(2, 50fr);
+            grid-template-columns: 100fr;
             gap: 40px;
         }
         .portfolio-item {
@@ -190,6 +193,14 @@ const { Content } = await item.render();
         .portfolio-item .portfolio-text h4 {
             color: var(--yellow-100);
             font-size: 24px;
+        }
+        @media (min-width: 768px) {
+            .top-section {
+                flex-direction: row;
+            }
+            .portfolio-items {
+                grid-template-columns: repeat(2, 50fr);
+            }
         }
     </style>
 </Layout>

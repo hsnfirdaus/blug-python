@@ -107,5 +107,34 @@ const { title, active } = Astro.props;
 	}
 	.decorated.decor-right::after {
 		left: 100%;
+		transform: translate(-100%, -50%);
+	}
+	.md-content p,
+	.md-content h2,
+	.md-content h3,
+	.md-content h4,
+	.md-content h5,
+	.md-content h6 {
+		margin: 10px auto 10px auto;
+		max-width: var(--max-width);
+	}
+	.md-content a {
+		color: var(--blue-40);
+	}
+	.md-content h2,
+	.md-content h3,
+	.md-content h4,
+	.md-content h5,
+	.md-content h6 {
+		color: var(--blue-100);
+	}
+	.md-content .astro-code {
+		padding: 12px;
+		border-radius: 8px;
+		margin: 10px 0;
+	}
+	.md-content p img {
+		border-radius: 12px;
+		height: auto;
 	}
 </style>

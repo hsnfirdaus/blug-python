@@ -10,9 +10,11 @@ const articles = (await getCollection("blog")).sort(
 );
 const authors = await getEntries(articles.map((item) => item.data.author));
 
-const topGrids = articles.slice(0, 3);
+// const topGrids = articles.slice(0, 3);
+const topGrids = [articles[0], articles[0], articles[0]];
 
-const otherGrids = articles.slice(3);
+// const otherGrids = articles.slice(3);
+const otherGrids = [articles[0], articles[0], articles[0]];
 ---
 
 <Layout title="Read Our Blog" active="blog">
@@ -87,12 +89,12 @@ const otherGrids = articles.slice(3);
     <style>
         .top-grid {
             display: grid;
-            grid-template-columns: repeat(3, 33.33fr);
-            grid-template-rows: repeat(2, 50fr);
+            grid-template-columns: 100fr;
             gap: 12px;
             grid-template-areas:
-                "first first second"
-                "first first third";
+                "first"
+                "second"
+                "third";
         }
         .top-grid .article:nth-child(1) {
             grid-area: first;
@@ -111,9 +113,6 @@ const otherGrids = articles.slice(3);
             border-radius: 12px;
             overflow: hidden;
             text-decoration: none;
-        }
-        .top-grid .article:nth-child(1) {
-            aspect-ratio: unset;
         }
         .top-grid .article:only-child {
             aspect-ratio: 16/9;
@@ -155,18 +154,16 @@ const otherGrids = articles.slice(3);
             margin-top: 5px;
             line-height: 1.5;
         }
-        .top-grid .article:first-child h3 {
-            font-size: 30px;
-        }
         .article .author {
             font-size: 14px;
         }
         .other-grid {
             display: grid;
-            margin-top: 12px;
-            grid-template-columns: repeat(3, minmax(100px, 1fr));
+            margin-top: 24px;
+            grid-template-columns: minmax(0, 1fr);
             gap: 12px;
             margin-bottom: 140px;
+            width: 100%;
         }
         .other-grid .article img,
         .other-grid .article .meta {
@@ -191,6 +188,41 @@ const otherGrids = articles.slice(3);
         }
         .other-grid .article .meta h3 {
             color: var(--blue-100);
+        }
+        @media (min-width: 768px) {
+            .top-grid {
+                grid-template-areas:
+                    "first first"
+                    "second third";
+                grid-template-columns: repeat(2, 50fr);
+                grid-template-rows: repeat(2, auto);
+            }
+
+            .top-grid .article:first-child h3 {
+                font-size: 30px;
+            }
+
+            .other-grid {
+                grid-template-columns: repeat(2, minmax(100px, 1fr));
+                gap: 24px;
+            }
+        }
+        @media (min-width: 1024px) {
+            .top-grid {
+                grid-template-areas:
+                    "first first second"
+                    "first first third";
+                grid-template-columns: repeat(3, 33.33fr);
+                grid-template-rows: repeat(2, 50fr);
+            }
+            .top-grid .article:nth-child(1) {
+                aspect-ratio: unset;
+            }
+            .other-grid {
+                grid-template-columns: repeat(3, minmax(100px, 1fr));
+                margin-top: 12px;
+                gap: 12px;
+            }
         }
     </style>
 </Layout>
