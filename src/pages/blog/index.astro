@@ -10,11 +10,9 @@ const articles = (await getCollection("blog")).sort(
 );
 const authors = await getEntries(articles.map((item) => item.data.author));
 
-// const topGrids = articles.slice(0, 3);
-const topGrids = [articles[0], articles[0], articles[0]];
+const topGrids = articles.slice(0, 3);
 
-// const otherGrids = articles.slice(3);
-const otherGrids = [articles[0], articles[0], articles[0]];
+const otherGrids = articles.slice(3);
 ---
 
 <Layout title="Read Our Blog" active="blog">
