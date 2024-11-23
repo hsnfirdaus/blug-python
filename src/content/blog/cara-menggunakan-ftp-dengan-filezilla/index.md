@@ -1,5 +1,5 @@
 ---
-title: Apa itu Figma?
+title: Cara menggunakan FTP dengan Filezilla
 cover: ./images.jpg
 author: haqqi
 date: 2023-23-11
