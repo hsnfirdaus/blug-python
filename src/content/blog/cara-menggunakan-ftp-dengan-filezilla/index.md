@@ -10,6 +10,7 @@ Ada beberapa cara yang bisa Anda gunakan untuk meng-upload file Anda ke server. 
 
 ## Yang Perlu Disiapkan
 Untuk bisa meengakses server anda menggunakan Filezilla, Anda harus terlebih dahulu menginstall Filezilla pada komputer anda. Akses link https://filezilla-project.org/download.php untuk mengunduh Filezilla. Setelah anda mengunduh Filezilla, Anda juga harus mendapatkan informasi detail FTP dari server yang anda tuju. Misalnya: hostname, port, username, dan password.
+
 ![Informasi Host](2.png)
 
 
@@ -25,15 +26,9 @@ Host: Isi dengan nama server Anda, Misalnya:  freemcserver.net
 Username: Isi dengan Username Server Anda
 Password: Isi dengan Password Server Anda
 Port: Isi dengan Port 21
-Setelah itu Silahkan klik 
-```
-Quickconnect
-```
+Setelah itu Silahkan klik QuickConnect
 Tunggu sebentar hingga muncul folder yang ada
 ![Folder FTP](4.png)
 
 ## Kesimpulan
-Untuk menggunakan ftp dengan Filezilla, Anda harus menginstall software Filezilla di komputer anda dan mengetahui informasi ftp detail di server yang anda inginkan. Untuk hostname, anda bisa memasukkan nama server. Kemudian masukkan username dan password server tujuan. Lalu isi port dengan 21. Setelah itu, Klik 
-```
-Quickconnect
-```.
+Untuk menggunakan ftp dengan Filezilla, Anda harus menginstall software Filezilla di komputer anda dan mengetahui informasi ftp detail di server yang anda inginkan. Untuk hostname, anda bisa memasukkan nama server. Kemudian masukkan username dan password server tujuan. Lalu isi port dengan 21. Setelah itu, Klik QuickConnect.
